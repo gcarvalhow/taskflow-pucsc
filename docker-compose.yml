@@ -1,0 +1,49 @@
+services:
+  postgresql:
+    image: postgres:latest
+    container_name: taskflow-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: MyStrong!Passw0rd
+      POSTGRES_DB: taskflow
+    ports:
+      - "5432:5432"
+    networks:
+      - taskflow-network
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  # backend:
+  #     build: ./backend
+  #     ports:
+  #       - "3001:3001"
+  #     volumes:
+  #       - ./backend:/app
+  #       - /app/node_modules
+  #     environment:
+  #       - NODE_ENV=development
+  #     networks:
+  #       - taskflow-network
+
+  # frontend:
+  #   build: ./frontend
+  #   ports:
+  #     - "3000:3000"
+  #   volumes:
+  #     - ./frontend:/app
+  #   environment:
+  #     - CHOKIDAR_USEPOLLING=true
+
+volumes:
+  postgres_data:
+
+networks:
+  taskflow-network:
+    driver: bridge

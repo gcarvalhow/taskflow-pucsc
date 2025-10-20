@@ -20,17 +20,18 @@ services:
       retries: 5
       start_period: 30s
 
-  # backend:
-  #     build: ./backend
-  #     ports:
-  #       - "3001:3001"
-  #     volumes:
-  #       - ./backend:/app
-  #       - /app/node_modules
-  #     environment:
-  #       - NODE_ENV=development
-  #     networks:
-  #       - taskflow-network
+  backend:
+      build: ./backend
+      environment:
+      - NODE_ENV=development
+      - DATABASE_URL=postgresql://postgres:MyStrong!Passw0rd@postgresql:5432/taskflow
+      ports:
+        - "3001:3001"
+      volumes:
+        - ./backend:/app
+        - /app/node_modules
+      networks:
+        - taskflow-network
 
   # frontend:
   #   build: ./frontend

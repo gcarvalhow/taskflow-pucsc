@@ -2,10 +2,13 @@ FROM node:18-alpine
 
 WORKDIR /app
 
-COPY package.json yarn.lock ./
-RUN yarn install --frozen-lockfile
+COPY package.json ./
+COPY package-lock.json ./
+RUN npm install
 
 COPY . .
-EXPOSE 3001
 
-CMD ["yarn", "start"]
+RUN npx prisma generate --schema=infra/prisma/schema.prisma
+
+EXPOSE 3001
+CMD npx prisma migrate deploy --schema=infra/prisma/schema.prisma && npm start

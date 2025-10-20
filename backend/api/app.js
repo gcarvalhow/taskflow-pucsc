@@ -3,9 +3,9 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require('cors');
 
-const userRouter = require('./routes/user');
-const taskRouter = require('./routes/task');
-const authRouter = require('./routes/auth');
+const authRouter = require('./routes/auth-routes');
+const userRouter = require('./routes/user-routes');
+const taskRouter = require('./routes/task-routes');
 
 const app = express();
 
@@ -27,9 +27,9 @@ app.use((req, res, next) => {
 app.use((err, req, res, next) => {
   res.status(err.status || 500);
   res.json({
+    isSuccess: false,
     error: {
-      message: err.message,
-      stack: req.app.get('env') === 'development' ? err.stack : undefined
+      message: err.message
     }
   });
 });

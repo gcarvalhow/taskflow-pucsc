@@ -35,5 +35,5 @@ docker-compose up --build -d
 
 Tanto o **backend** quanto o **frontend** são orquestrados pelo Docker conforme a configuração no `docker-compose.yml`.
 
-- O **Backend** estará disponível em: http://localhost:3001
-- O **Frontend** estará disponível em: http://localhost:3000
+O **Backend** estará disponível em: http://localhost:3001
+O **Frontend** estará disponível em: http://localhost:3000

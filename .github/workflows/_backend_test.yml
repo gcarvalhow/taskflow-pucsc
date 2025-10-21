@@ -39,9 +39,11 @@ jobs:
         run: npm install --legacy-peer-deps
         working-directory: ./backend
 
-        - name: Generate Prisma Client
-          run: npx prisma generate
-          working-directory: ./backend
+      - name: Generate Prisma Client
+        run: npx prisma generate --schema=backend/infra/prisma/schema.prisma
+
+      - name: Apply Prisma Migrations
+        run: npx prisma migrate deploy --schema=backend/infra/prisma/schema.prisma
 
       - name: Run tests
         run: npm test

@@ -27,8 +27,7 @@ export default function LoginPage() {
       }
       if (data.token) {
         localStorage.setItem("token", data.token);
-        // Redirecionar para página principal ou dashboard
-        router.push("/");
+        router.push("/tasks");
       } else {
         setError("Resposta inesperada do servidor");
       }

@@ -16,25 +16,26 @@ export default function RegisterPage() {
     setLoading(true);
     setError("");
     setSuccess("");
+    if (password !== confirmPassword) {
+      setError("As senhas não coincidem");
+      setLoading(false);
+      return;
+    }
     try {
-      const res = await fetch("http://localhost:3001/auth/register", {
+      const res = await fetch("http://localhost:3001/users/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password, confirmPassword })
       });
       const data = await res.json();
       if (!res.ok) {
-        setError(data?.error?.message || "Erro ao cadastrar");
+        const errorMsg = data?.error?.message || data?.error || "Erro ao cadastrar";
+        setError(errorMsg);
         setLoading(false);
         return;
       }
-      if (data.token) {
-        localStorage.setItem("token", data.token);
-        setSuccess("Cadastro realizado! Redirecionando...");
-        setTimeout(() => router.push("/"), 1200);
-      } else {
-        setError("Resposta inesperada do servidor");
-      }
+      setSuccess("Cadastro realizado! Redirecionando para login...");
+      setTimeout(() => router.push("/login"), 1200);
     } catch (err) {
       setError("Erro de conexão com o servidor");
     } finally {
@@ -56,7 +57,7 @@ export default function RegisterPage() {
             id="email"
             type="email"
             placeholder="Digite seu e-mail"
-            className="border border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary/60 bg-background text-gray-900"
+            className="border border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary/60 bg-background text-gray-900 dark:text-gray-100"
             value={email}
             onChange={e => setEmail(e.target.value)}
             required
@@ -68,7 +69,7 @@ export default function RegisterPage() {
             id="password"
             type="password"
             placeholder="Digite sua senha"
-            className="border border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary/60 bg-background text-gray-900"
+            className="border border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary/60 bg-background text-gray-900 dark:text-gray-100"
             value={password}
             onChange={e => setPassword(e.target.value)}
             required
@@ -80,7 +81,7 @@ export default function RegisterPage() {
             id="confirmPassword"
             type="password"
             placeholder="Confirme sua senha"
-            className="border border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary/60 bg-background text-gray-900"
+            className="border border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary/60 bg-background text-gray-900 dark:text-gray-100"
             value={confirmPassword}
             onChange={e => setConfirmPassword(e.target.value)}
             required

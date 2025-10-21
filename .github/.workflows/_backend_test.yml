@@ -1,0 +1,23 @@
+name: Backend Test
+
+on:
+  pull_request:
+    branches:
+      - master
+  
+  steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: latest
+
+    - name: Install dependencies
+      run: npm install --legacy-peer-deps
+      working-directory: ./backend
+
+    - name: Run tests
+      run: npm test
+      working-directory: ./backend

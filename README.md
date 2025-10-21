@@ -12,7 +12,7 @@ O projeto utiliza uma infraestrutura baseada em containers Docker para garantir 
 
 ### 1. Rodar a Infraestrutura Local
 
-Para simplificar o ambiente de desenvolvimento, todos os serviços de infraestrutura são gerenciados via Docker Compose.
+Para simplificar o ambiente de desenvolvimento, todos os serviços de infraestrutura são gerenciados via Docker.
 
 Na raiz do projeto, basta executar:
 
@@ -29,3 +29,4 @@ O backend e o frontend já estão configurados no `docker-compose.yml` e serão 
 - O **Backend** estará disponível em: http://localhost:3001
 
 - O **Frontend** estará disponível em: http://localhost:3000
+

@@ -10,15 +10,22 @@ O projeto utiliza uma infraestrutura baseada em containers Docker para garantir 
 
 ## Executar o projeto localmente
 
-Para simplificar o ambiente de desenvolvimento, todo o projeto é gerenciado através de containers **Docker**.
+### 1. Rodar a Infraestrutura Local
 
-Todos os serviços estão definidos no arquivo `docker-compose.yml` e conectados pela mesma rede. Basta executar o comando:
+Para simplificar o ambiente de desenvolvimento, todos os serviços de infraestrutura são gerenciados via Docker Compose.
+
+Na raiz do projeto, basta executar:
 
 ```bash
 docker-compose up --build -d
 ```
 
-Tanto o **backend** quanto o **frontend** são orquestrados pelo Docker conforme a configuração no `docker-compose.yml`.
+Os serviços estarão disponíveis nas portas padrão (PostgreSQL: 5432).
+
+### 2. Rodar o Backend e Frontend
+
+O backend e o frontend já estão configurados no `docker-compose.yml` e serão iniciados automaticamente junto com a infraestrutura. Não é necessário rodar comandos separados para cada serviço.
 
 - O **Backend** estará disponível em: http://localhost:3001
+
 - O **Frontend** estará disponível em: http://localhost:3000

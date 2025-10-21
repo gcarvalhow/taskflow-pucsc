@@ -1,3 +1,4 @@
+const validator = require('validator');
 const TaskRepository = require('../../infra/repositories/task-repository');
 
 class TaskService {
@@ -18,8 +19,17 @@ class TaskService {
     return task;
   }
 
-  async createTask(data) {
-    return await TaskRepository.create(data);
+  async createTask(data, userId) {
+    if (!userId || typeof userId !== 'string' || !validator.isUUID(userId)) {
+      throw new Error('ID de usuário inválido');
+    }
+
+    const taskData = {
+      ...data,
+      userId: userId
+    }
+
+    return await TaskRepository.create(taskData);
   }
 
   async updateTask(id, data) {
@@ -49,4 +59,4 @@ class TaskService {
   }
 }
 
-module.exports = TaskService;
+module.exports = new TaskService();

@@ -33,14 +33,12 @@ services:
       networks:
         - taskflow-network
 
-  # frontend:
-  #   build: ./frontend
-  #   ports:
-  #     - "3000:3000"
-  #   volumes:
-  #     - ./frontend:/app
-  #   environment:
-  #     - CHOKIDAR_USEPOLLING=true
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    networks:
+      - taskflow-network
 
 volumes:
   postgres_data:

@@ -2,11 +2,12 @@ const express = require('express');
 const router = express.Router();
 
 const wrapAsync = require('../middleware/wrap-middleware');
+const authMiddleware = require('../middleware/auth-middleware');
 
 const UserService = require('../../domain/services/user-service');
 const { RequestUserDTO, ResponseUserDto } = require('../dtos/user-dto');
 
-router.get('/:id', wrapAsync(async (req, res) => {
+router.get('/:id', authMiddleware, wrapAsync(async (req, res) => {
   const user = await UserService.getUserById(req.params.id);
   const responseDto = new ResponseUserDto(user);
 

@@ -17,6 +17,10 @@ class UserService {
     }
 
     async createUser(data) {
+        if (await UserRepository.findOneByParams({ email: data.email })) {
+            throw new Error('Email já cadastrado');
+        }
+        
         const hashedPassword = await bcrypt.hash(data.password, 10);
         
         const userData = {

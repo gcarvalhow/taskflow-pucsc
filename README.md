@@ -42,6 +42,4 @@ Os serviços estarão disponíveis nas portas padrão (PostgreSQL: 5432).
 O backend e o frontend já estão configurados no `docker-compose.yml` e serão iniciados automaticamente junto com a infraestrutura. Não é necessário rodar comandos separados para cada serviço.
 
 - O **Backend** estará disponível em: http://localhost:3001
-
 - O **Frontend** estará disponível em: http://localhost:3000
-

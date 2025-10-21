@@ -1,17 +1,12 @@
 class RequestTaskDTO {
-  constructor({ title, description, completed, userId }) {
+  constructor({ title, description, completed }) {
     if (!title || typeof title !== 'string' || title.trim() === '') {
       throw new Error('Título é obrigatório');
-    }
-
-    if (!userId || typeof userId !== 'string' || !validator.isUUID(id)) {
-      throw new Error('userId é obrigatório');
     }
 
     this.title = title;
     this.description = description || '';
     this.completed = !!completed;
-    this.userId = userId;
   }
 }
 

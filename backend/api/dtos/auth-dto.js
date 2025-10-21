@@ -16,4 +16,4 @@ class RequestLoginDTO {
     }
 }
 
-module.exports = { RequestLoginDTO };
+module.exports = RequestLoginDTO;

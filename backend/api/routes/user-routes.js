@@ -6,6 +6,13 @@ const wrapAsync = require('../middleware/wrap-middleware');
 const UserService = require('../../domain/services/user-service');
 const { RequestUserDTO, ResponseUserDto } = require('../dtos/user-dto');
 
+router.get('/:id', wrapAsync(async (req, res) => {
+  const user = await UserService.getUserById(req.params.id);
+  const responseDto = new ResponseUserDto(user);
+
+  res.status(200).json({ isSuccess: true, user: responseDto });
+}));
+
 router.post('/', wrapAsync(async (req, res) => {
   const userDto = new RequestUserDTO(req.body);
   if (userDto.isSuccess === false) {
@@ -16,13 +23,6 @@ router.post('/', wrapAsync(async (req, res) => {
   const responseDto = new ResponseUserDto(user);
 
   res.status(201).json({ isSuccess: true, user: responseDto });
-}));
-
-router.get('/:id', wrapAsync(async (req, res) => {
-  const user = await UserService.getUserById(req.params.id);
-  const responseDto = new ResponseUserDto(user);
-  
-  res.status(200).json({ isSuccess: true, user: responseDto });
 }));
 
 module.exports = router;

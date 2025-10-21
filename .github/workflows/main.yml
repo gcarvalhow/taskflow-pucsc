@@ -14,5 +14,5 @@ jobs:
     uses: ./.github/workflows/_frontend_build.yml
 
   sonar-qube:
-    needs: backend-test
+    needs: backend-test, frontend-build
     uses: ./.github/workflows/_sonar_qube.yml

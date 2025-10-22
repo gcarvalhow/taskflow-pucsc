@@ -1,11 +1,11 @@
-name: SonarCloud
+name: SonarCloud Analysis
 
 on:
   workflow_call:
 
 jobs:
   build:
-    name: Build and analyze
+    name: Build and analyze code
     runs-on: ubuntu-latest
     
     steps:
@@ -21,11 +21,11 @@ jobs:
           fetch-depth: 0
 
       - name: Install backend dependencies
-        run: npm ci
+        run: npm install
         working-directory: backend
 
       - name: Install frontend dependencies
-        run: npm ci
+        run: npm install
         working-directory: frontend
 
       - name: Cache SonarCloud packages

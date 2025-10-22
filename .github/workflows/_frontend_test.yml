@@ -9,6 +9,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Show jest.config.js
+        run: cat jest.config.js
+        working-directory: ./frontend
+
+      - name: List jest and ts-jest versions
+        run: npm ls jest ts-jest
+        working-directory: ./frontend
+        
       - name: Checkout source code
         uses: actions/checkout@v4
 

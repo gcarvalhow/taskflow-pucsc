@@ -4,8 +4,8 @@ on:
   workflow_call:
 
 jobs:
-  test:
-    name: Test Backend
+  build-and-test:
+    name: Build and test backend
     runs-on: ubuntu-latest
 
     env:
@@ -27,11 +27,11 @@ jobs:
           --health-retries=5
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - name: Checkout source code
+        uses: actions/checkout@v4
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: latest
 
@@ -39,13 +39,12 @@ jobs:
         run: npm install --legacy-peer-deps
         working-directory: ./backend
 
-      - name: Generate Prisma Client
+      - name: Generate prisma client
         run: npx prisma generate --schema=backend/infra/prisma/schema.prisma
 
-      - name: Apply Prisma Migrations
+      - name: Apply prisma migrations
         run: npx prisma migrate deploy --schema=backend/infra/prisma/schema.prisma
 
-      - name: Run tests
+      - name: Run backend tests
         run: npm test
-
         working-directory: ./backend

@@ -9,12 +9,11 @@ jobs:
   backend-test:
     uses: ./.github/workflows/_backend_test.yml
 
-  frontend-build:
-    needs: backend-test
-    uses: ./.github/workflows/_frontend_build.yml
+  frontend-test:
+    uses: ./.github/workflows/_frontend_test.yml
 
   sonar-qube:
     needs: 
       - backend-test 
-      - frontend-build
+      - frontend-test
     uses: ./.github/workflows/_sonar_qube.yml

@@ -26,5 +26,5 @@ jobs:
         working-directory: ./frontend
 
       - name: Run frontend tests
-        run: npm test
+        run: npx jest --config jest.config.js
         working-directory: ./frontend
